@@ -1,4 +1,4 @@
-# Sickle Cell Anemia Detection System
+# Anemia Detection System
 
 A deep learning application to detect anemia from 
 microscopic blood smear images using MobileNetV2.
