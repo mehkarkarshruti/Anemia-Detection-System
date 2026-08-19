@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -118,14 +119,16 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 @st.cache_resource
 def load_anemia_model():
-    """Try final_model.h5 first, fall back to best_model.h5."""
-    for path in ("final_model.h5", "best_model.h5"):
-        try:
-            model = keras.models.load_model(path)
-            return model, f"✅ Model loaded successfully from `{path}`"
-        except Exception:
-            continue
-    return None, "❌ Error loading model: no valid model file found (expected final_model.h5 or best_model.h5)"
+  model_path = "anemia_model.h5"
+
+  if not os.path.exists(model_path):
+    return None, f"File not found: `{model_path}`"
+
+  try:
+    model = keras.models.load_model(model_path, compile=False)
+    return model, f"Model loaded successfully from `{model_path}`"
+  except Exception as e:
+    return None, f"Error loading `{model_path}`: {str(e)}"
 
 
 model, model_message = load_anemia_model()
