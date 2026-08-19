@@ -119,7 +119,7 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 @st.cache_resource
 def load_anemia_model():
-  model_path = "anemia_model.h5"
+  model_path = "models/anemia_model.h5"
 
   if not os.path.exists(model_path):
     return None, f"File not found: `{model_path}`"
